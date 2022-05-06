@@ -42,12 +42,14 @@ install:
 
 # Zip the built plugin binaries
 zip:
+	pwd
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_linux_arm64.zip ./bin/linux_arm64/waypoint-plugin-${PLUGIN_NAME}
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_linux_amd64.zip ./bin/linux_amd64/waypoint-plugin-${PLUGIN_NAME}
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_darwin_arm64.zip ./bin/darwin_arm64/waypoint-plugin-${PLUGIN_NAME}
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_darwin_amd64.zip ./bin/darwin_amd64/waypoint-plugin-${PLUGIN_NAME}
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_windows_amd64.zip ./bin/windows_amd64/waypoint-plugin-${PLUGIN_NAME}.exe
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_windows_386.zip ./bin/windows_386/waypoint-plugin-${PLUGIN_NAME}.exe
+	ls -lha ./bin
 
 # Build the plugin using a Docker container
 build-docker:
