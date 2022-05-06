@@ -2,8 +2,6 @@ FROM golang:1.18.1-alpine3.14 as build
 
 # Install the Protocol Buffers compiler and Go plugin
 RUN apk add protobuf git make zip
-RUN go get github.com/golang/protobuf/protoc-gen-go \
-    google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 # Create the source folder
 RUN mkdir /go/plugin
@@ -11,6 +9,9 @@ WORKDIR /go/plugin
 
 # Copy the source to the build folder
 COPY . /go/plugin
+
+RUN go get github.com/golang/protobuf/protoc-gen-go \
+    google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 # Build the plugin
 RUN chmod +x ./print_arch
