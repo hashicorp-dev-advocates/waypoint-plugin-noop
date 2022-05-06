@@ -48,3 +48,8 @@ zip:
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_darwin_amd64.zip ./bin/darwin_amd64/waypoint-plugin-${PLUGIN_NAME}
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_windows_amd64.zip ./bin/windows_amd64/waypoint-plugin-${PLUGIN_NAME}.exe
 	zip -j ./bin/waypoint-plugin-${PLUGIN_NAME}_windows_386.zip ./bin/windows_386/waypoint-plugin-${PLUGIN_NAME}.exe
+
+# Build the plugin using a Docker container
+build-docker:
+	rm -rf ./releases
+	DOCKER_BUILDKIT=1 docker build --output releases --progress=plain .
