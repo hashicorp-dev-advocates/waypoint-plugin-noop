@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/eveldcorp/waypoint-plugin-noop/platform"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/waypoint-plugin-sdk/terminal"
 )
@@ -44,7 +43,6 @@ func (rm *ReleaseManager) release(
 	ctx context.Context,
 	log hclog.Logger,
 	ui terminal.UI,
-	target *platform.Deployment,
 ) (*Release, error) {
 	u := ui.Status()
 	defer u.Close()
