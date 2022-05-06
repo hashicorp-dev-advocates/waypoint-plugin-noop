@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/waypoint-plugin-sdk/component"
-	sdk "github.com/hashicorp/waypoint-plugin-sdk/proto/gen"
 	"github.com/hashicorp/waypoint-plugin-sdk/terminal"
 )
 
@@ -38,10 +37,6 @@ func (p *Platform) DeployFunc() interface{} {
 	return p.deploy
 }
 
-func (p *Platform) StatusFunc() interface{} {
-	return p.status
-}
-
 func (b *Platform) deploy(
 	ctx context.Context,
 	ui terminal.UI,
@@ -53,19 +48,4 @@ func (b *Platform) deploy(
 	u.Update("Step skipped")
 
 	return &Deployment{}, nil
-}
-
-func (d *Platform) status(
-	ctx context.Context,
-	ji *component.JobInfo,
-	ui terminal.UI,
-	log hclog.Logger,
-	deployment *Deployment,
-) (*sdk.StatusReport, error) {
-	sg := ui.StepGroup()
-	s := sg.Add("Step skipped")
-	s.Update("Step skipped")
-	s.Done()
-
-	return &sdk.StatusReport{}, nil
 }

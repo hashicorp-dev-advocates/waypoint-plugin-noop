@@ -6,4 +6,5 @@ package release;
 option go_package = "github.com/eveldcorp/waypoint-plugin-noop/release";
 
 message Release {
+  string url = 1;
 }

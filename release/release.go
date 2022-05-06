@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/eveldcorp/waypoint-plugin-noop/platform"
 	"github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/waypoint-plugin-sdk/component"
-	sdk "github.com/hashicorp/waypoint-plugin-sdk/proto/gen"
 	"github.com/hashicorp/waypoint-plugin-sdk/terminal"
 )
 
@@ -16,6 +15,8 @@ type ReleaseConfig struct {
 type ReleaseManager struct {
 	config ReleaseConfig
 }
+
+func (r *Release) URL() string { return "" }
 
 // Implement Configurable
 func (rm *ReleaseManager) Config() (interface{}, error) {
@@ -39,35 +40,15 @@ func (rm *ReleaseManager) ReleaseFunc() interface{} {
 	return rm.release
 }
 
-func (rm *ReleaseManager) StatusFunc() interface{} {
-	return rm.status
-}
-
 func (rm *ReleaseManager) release(
 	ctx context.Context,
 	log hclog.Logger,
-	dcr *component.DeclaredResourcesResp,
 	ui terminal.UI,
+	target *platform.Deployment,
 ) (*Release, error) {
 	u := ui.Status()
 	defer u.Close()
 	u.Update("Skipped step")
 
 	return &Release{}, nil
-}
-
-func (rm *ReleaseManager) status(
-	ctx context.Context,
-	ji *component.JobInfo,
-	log hclog.Logger,
-	ui terminal.UI,
-	release *Release,
-) (*sdk.StatusReport, error) {
-	sg := ui.StepGroup()
-	s := sg.Add("Skipped step")
-
-	s.Update("Skipped step")
-	s.Done()
-
-	return &sdk.StatusReport{}, nil
 }
