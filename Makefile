@@ -26,8 +26,8 @@ build:
 	# Clear the output
 	rm -rf ./bin
 
-	GOOS=linux GOARCH=arm64 go build -o ./bin/linux_arm64/waypoint-plugin-${PLUGIN_NAME} ./main.go 
-	GOOS=linux GOARCH=amd64 go build -o ./bin/linux_amd64/waypoint-plugin-${PLUGIN_NAME} ./main.go 
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -o ./bin/linux_arm64/waypoint-plugin-${PLUGIN_NAME} ./main.go 
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./bin/linux_amd64/waypoint-plugin-${PLUGIN_NAME} ./main.go 
 	GOOS=darwin GOARCH=arm64 go build -o ./bin/darwin_arm64/waypoint-plugin-${PLUGIN_NAME} ./main.go 
 	GOOS=darwin GOARCH=amd64 go build -o ./bin/darwin_amd64/waypoint-plugin-${PLUGIN_NAME} ./main.go 
 	GOOS=windows GOARCH=amd64 go build -o ./bin/windows_amd64/waypoint-plugin-${PLUGIN_NAME}.exe ./main.go 
